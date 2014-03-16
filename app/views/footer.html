@@ -1,0 +1,13 @@
+<div class="social-links-container">
+  <ul>
+    <li ng-repeat="link in links">
+      <a target="_blank" ng-href="{{link.url}}">
+        <div class='social-image ng-class:link.name'></div>
+      </a>
+    </li>
+  </ul>  
+</div>
+
+<div class="copyright">
+  &copy {{year}} Michael Murphy, All Rights Reserved
+</div>

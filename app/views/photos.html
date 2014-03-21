@@ -27,8 +27,9 @@
 
 <div class="row photos-row">
   <div class="col-md-12 photos-col">
-    <ul class='photos'>
-      <!-- This complex filter needs to be replaced once there is a backend -->
+
+    <ul ng-switch='filteredPhotos.length' class='photos'>
+      <li ng-switch-when='0' class='no-photos'>No photos found</li>
 
       <li class='photo' ng-repeat="photo in filteredPhotos">
       <!-- <li class='photo' ng-repeat="photo in (filteredPhotos = (photos | filter:query | photoLineFilter:line:stations))"> -->
@@ -58,7 +59,6 @@
                 </button>
               </li>
             </ul>
-
           </div>
         </div>
       </li>

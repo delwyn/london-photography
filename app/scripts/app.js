@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('app', ['ngResource', 'ngRoute'])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/photos.html',
+angular.module('app', ['ngResource', 'ui.router'])
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/photos');
+
+    $stateProvider
+      .state('photos', {
+        url: '/photos',
+        templateUrl: '/views/photos.html',
         controller: 'PhotosCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
   });

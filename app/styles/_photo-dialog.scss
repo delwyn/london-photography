@@ -1,0 +1,31 @@
+.photo-dialog-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  background-color: #333;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+.photo-dialog {
+  position: fixed;
+  top: 5%;
+  height: 90%;
+  left: 30%;
+  width: 40%;
+  background-color: #000;
+  @include border-top-radius(10px);
+  @include border-bottom-radius(10px);
+  padding: 10px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+.dialog-img {
+  width: 100%;
+}
+

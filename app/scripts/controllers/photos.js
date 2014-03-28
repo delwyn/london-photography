@@ -7,9 +7,13 @@ angular.module('app')
 
     $scope.stations = Station.all();
     $scope.lines    = Line.all();
-    $scope.photos   = Photo.all();
 
-    $scope.$watchCollection('[line, query]', function(newValues) {
+    // $scope.photos   = Photo.all();
+    Photo.all().then(function(photos) {
+      $scope.photos = photos;
+    });
+
+    $scope.$watchCollection('[line, query, photos]', function(newValues) {
       var line  = newValues[0];
       var query = newValues[1];
 

@@ -8,6 +8,10 @@
  * @return {[array]} Objects matching
  */
 function byIds(objects, ids) {
+  if (!objects) {
+    return objects;
+  }
+
   return objects.filter(function(object) {
     return ids.indexOf(object.id) !== -1;
   });

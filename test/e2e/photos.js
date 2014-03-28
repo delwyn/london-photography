@@ -3,7 +3,7 @@
 describe('Photos', function() {
 
   beforeEach(function() {
-    browser().navigateTo('/');
+    browser().navigateTo('/#/photos/');
   });
 
   // Need to figure out how to mock out factories???

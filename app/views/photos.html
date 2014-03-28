@@ -2,7 +2,7 @@
 
 <div class="row map-row">
   <div class="col-md-12 photo-map-col">
-    <google-map class='photo-map'></my-map>
+    <google-map class='photo-map'></google-map>
   </div>
 </div>
 
@@ -11,7 +11,6 @@
     <form class="form-inline">
       <input type="search" class="form-control search" placeholder="Search..." ng-model="query">
     </form>
-
   </div>
 
   <div class="col-md-10 col-xs-9">
@@ -35,7 +34,9 @@
       <!-- <li class='photo' ng-repeat="photo in (filteredPhotos = (photos | filter:query | photoLineFilter:line:stations))"> -->
         <div class="row">
           <div class="col-md-3">
-            <img ng-src="{{photo.smallUrl}}"/>
+            <a ui-sref="photos.photo({ id: photo.id })">
+              <img ng-src="{{photo.smallUrl}}"/>
+            </a>
           </div>
 
           <div class="col-md-7">
@@ -65,3 +66,6 @@
     </ul>
   </div>
 </div>
+
+<!-- Nested view for photo dialog -->
+<div ui-view></div>

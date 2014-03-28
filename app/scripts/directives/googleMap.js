@@ -40,7 +40,7 @@ angular.module('app')
         map = new google.maps.Map(element[0], mapOptions);
 
         scope.$watch('filteredPhotos', function(photos) {
-          if (!photos) { return; }
+          if (!(photos instanceof Array)) { return; }
 
           clearPhotoMarkers();
 

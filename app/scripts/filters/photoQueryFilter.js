@@ -8,17 +8,24 @@
  * @return {[array]}  The photos matching the query
  */
 function photoQueryFilter(photos, query) {
-  if (!query) return photos;
+  if (!query) {
+    return photos;
+  }
 
   var regex = new RegExp('\\b' + query, 'i');
 
   return photos.filter(function(photo) {
-    if (photo.name.match(regex)) return true;
-    if (photo.description.match(regex)) return true;
+    if (photo.name.match(regex)) {
+      return true;
+    }
+
+    if (photo.description.match(regex)) {
+      return true;
+    }
 
     return false;
   });
-};
+}
 
 angular.module('app').filter('photoQueryFilter', function() {
   return photoQueryFilter;

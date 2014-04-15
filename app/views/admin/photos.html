@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="photo in photos">
+      <td>
+        <a ui-sref="admin.photos.photo({id: photo.id})">{{photo.name}}</a>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

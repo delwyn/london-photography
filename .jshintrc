@@ -1,7 +1,6 @@
 {
   "node": true,
   "browser": true,
-  "es5": true,
   "esnext": true,
   "bitwise": true,
   "camelcase": true,
@@ -21,6 +20,7 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-    "google" : false
+    "google" : false,
+    "$" : false
   }
 }

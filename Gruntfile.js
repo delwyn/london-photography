@@ -1,4 +1,4 @@
-// Generated on 2014-03-14 using generator-angular 0.7.1
+// Generated on 2014-04-15 using generator-angular 0.8.0
 'use strict';
 
 // # Globbing
@@ -6,6 +6,8 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
 module.exports = function (grunt) {
 
@@ -27,9 +29,13 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      bower: {
+        files: ['bower.json'],
+        tasks: ['bowerInstall']
+      },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:jshint:all', 'concat:app'],
         options: {
           livereload: true
         }
@@ -37,6 +43,9 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
+      },
+      views: {
+        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -65,13 +74,31 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/api',
+          host: 'localhost',
+          port: 5000,
+          https: false,
+          changeOrigin: false,
+          xforward: false
+        }
+      ],
       livereload: {
         options: {
           open: true,
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]
+          ],
+          middleware: function (connect, options) {
+            var middlewares = [];
+            options.base.forEach(function(base) {
+              middlewares.push(connect.static(base));
+            });
+            middlewares.push(proxySnippet);
+            return middlewares;
+          }
         }
       },
       test: {
@@ -97,10 +124,12 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
-      ],
+      all: {
+        src: [
+          'Gruntfile.js',
+          '<%= yeoman.app %>/scripts/{,*/}*.js'
+        ]
+      },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
@@ -140,15 +169,16 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    'bower-install': {
+    bowerInstall: {
       app: {
-        html: '<%= yeoman.app %>/index.html',
+        src: ['<%= yeoman.app %>/index.html'],
         ignorePath: '<%= yeoman.app %>/'
+      },
+      sass: {
+        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: '<%= yeoman.app %>/bower_components/'
       }
     },
-
-
-
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -199,7 +229,16 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= yeoman.dist %>',
+        flow: {
+          html: {
+            steps: {
+              js: ['concat', 'uglifyjs'],
+              css: ['cssmin']
+            },
+            post: {}
+          }
+        }
       }
     },
 
@@ -213,6 +252,12 @@ module.exports = function (grunt) {
     },
 
     // The following *-min tasks produce minified files in the dist folder
+    cssmin: {
+      options: {
+        root: '<%= yeoman.app %>'
+      }
+    },
+
     imagemin: {
       dist: {
         files: [{
@@ -223,6 +268,7 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     svgmin: {
       dist: {
         files: [{
@@ -233,6 +279,7 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     htmlmin: {
       dist: {
         options: {
@@ -250,8 +297,9 @@ module.exports = function (grunt) {
       }
     },
 
-    // Allow the use of non-minsafe AngularJS files. Automatically makes it
-    // minsafe compatible so Uglify does not destroy the ng references
+    // ngmin tries to make the code safe for minification automatically by
+    // using the Angular long form for dependency injection. It doesn't work on
+    // things like resolve or inject so those have to be done manually.
     ngmin: {
       dist: {
         files: [{
@@ -283,10 +331,8 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
-            'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/*',
-            'json/*'
+            'fonts/*'
           ]
         }, {
           expand: true,
@@ -344,19 +390,32 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
+    concat: {
+      app: {
+        options: {
+          banner: '\'use strict\';\n\n',
+          process: function(src, filepath) {
+            return '// Source: ' + filepath + '\n' +
+            src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+          }
+        },
+        src: '<%= yeoman.app %>/scripts/**/*.js',
+        dest: '.tmp/scripts/all.js'
+      }
+    },
+
     // Test settings
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: false
+        singleRun: true
       },
       e2e: {
         configFile: 'karma-e2e.conf.js',
-        singleRun: false
+        singleRun: true
       }
     },
 
-    // Sprites
     sprite: {
       'social': {
         src: '<%= yeoman.app %>/images/sprites/social/*.{png,jpg,gif}',
@@ -367,29 +426,31 @@ module.exports = function (grunt) {
         'engineOpts': {
           'imagemagick': true
         }
+
       }
     }
   });
 
-
-  grunt.registerTask('serve', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'clean:server',
-      'bower-install',
+      'bowerInstall',
+      'concat:app',
       'concurrent:server',
+      'configureProxies:server',
       'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
   });
 
-  grunt.registerTask('server', function () {
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
+    grunt.task.run(['serve:' + target]);
   });
 
   grunt.registerTask('test', [
@@ -410,7 +471,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bower-install',
+    'bowerInstall',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

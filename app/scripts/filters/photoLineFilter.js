@@ -26,7 +26,7 @@ function photoLineFilter(photos, lineId, stations) {
       return stationIds.indexOf(station) !== -1;
     });
   });
-};
+}
 
 angular.module('app').filter('photoLineFilter',function() {
   return photoLineFilter;

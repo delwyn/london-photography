@@ -6,5 +6,5 @@ angular.module('app')
 
     $scope.closeDialog = function() {
       $state.go('photos');
-    }
+    };
   }]);

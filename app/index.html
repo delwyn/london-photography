@@ -17,7 +17,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
   </head>
-  <body ng-app="app">
+  <body ng-app="app" section-class>
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -27,13 +27,9 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-
     <div class="container" ng-view>
         <section ui-view></section>
     </div>
-
-    <footer ng-include="'views/footer.html'" ng-controller="FooterCtrl"></footer>
 
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -42,24 +38,13 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- <script src="bower_components/bootstrap-sass/dist/js/bootstrap.js"></script> -->
-
-    <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/photos.js"></script>
-    <script src="scripts/controllers/photo.js"></script>
-    <script src="scripts/controllers/footer.js"></script>
-    <script src="scripts/filters/photoLineFilter.js"></script>
-    <script src="scripts/filters/byIds.js"></script>
-    <script src="scripts/directives/googleMap.js"></script>
-    <script src="scripts/services/Photo.js"></script>
-    <script src="scripts/services/Station.js"></script>
-    <script src="scripts/services/Line.js"></script>
-    <script src="scripts/filters/photoQueryFilter.js"></script>
+    <!-- build:js(.tmp) scripts/all.js -->
+    <script src="scripts/all.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

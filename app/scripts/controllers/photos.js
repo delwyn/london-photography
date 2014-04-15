@@ -1,17 +1,13 @@
 'use strict';
 
 angular.module('app')
-  .controller('PhotosCtrl', ['$scope', '$filter', 'Line', 'Photo', 'Station', function ($scope, $filter, Line, Photo, Station) {
+  .controller('PhotosCtrl', ['$scope', '$filter', 'photos', 'lines', 'stations', function ($scope, $filter, photos, lines, stations) {
     $scope.query = '';
     $scope.line  = null;
 
-    $scope.stations = Station.all();
-    $scope.lines    = Line.all();
-
-    // $scope.photos   = Photo.all();
-    Photo.all().then(function(photos) {
-      $scope.photos = photos;
-    });
+    $scope.stations = stations;
+    $scope.lines    = lines;
+    $scope.photos   = photos;
 
     $scope.$watchCollection('[line, query, photos]', function(newValues) {
       var line  = newValues[0];

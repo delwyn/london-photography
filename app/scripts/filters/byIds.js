@@ -15,7 +15,7 @@ function byIds(objects, ids) {
   return objects.filter(function(object) {
     return ids.indexOf(object.id) !== -1;
   });
-};
+}
 
 angular.module('app').filter('byIds', function() {
   return byIds;

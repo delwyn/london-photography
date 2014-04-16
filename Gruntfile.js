@@ -35,17 +35,18 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'concat:app'],
+        tasks: ['concat:app'], // 'newer:jshint:all'
         options: {
           livereload: true
         }
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['karma:unit'] // 'newer:jshint:test'
       },
       views: {
         files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        tasks: ['ngtemplates:app']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -428,6 +429,17 @@ module.exports = function (grunt) {
         }
 
       }
+    },
+
+    ngtemplates: {
+      app: {
+        options: {
+          module: 'app'
+        },
+        cwd: 'app',
+        src: 'views/**/*.html',
+        dest: '.tmp/scripts/templates.js'
+      }
     }
   });
 
@@ -439,6 +451,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'bowerInstall',
+      'ngtemplates',
       'concat:app',
       'concurrent:server',
       'configureProxies:server',
@@ -475,6 +488,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'ngtemplates',
     'concat',
     'ngmin',
     'copy:dist',

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app')
-  .controller('PhotoCtrl', ['$scope', '$stateParams', '$state', 'Photo', function ($scope, $stateParams, $state, Photo) {
-    $scope.photo = Photo.find($stateParams.id);
+  .controller('PhotoCtrl', ['$scope', '$stateParams', '$state', 'photo', function ($scope, $stateParams, $state, photo) {
+    $scope.photo = photo;
 
     $scope.closeDialog = function() {
       $state.go('photos');

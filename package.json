@@ -51,7 +51,8 @@
     "grunt-spritesmith": "~1.25.0",
     "grunt-connect-proxy": "~0.1.10",
     "grunt-contrib-uglify": "^0.4.0",
-    "optipng-bin": "^0.3.3"
+    "optipng-bin": "^0.3.3",
+    "grunt-angular-templates": "^0.5.4"
   },
   "engines": {
     "node": ">=0.10.0"

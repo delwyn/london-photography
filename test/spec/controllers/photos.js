@@ -11,15 +11,20 @@ describe('Controller: PhotosCtrl', function () {
 
   beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
     scope = $rootScope.$new();
-    ctrl = $controller('PhotosCtrl', { $scope: scope });
+    ctrl = $controller('PhotosCtrl', {
+      $scope: scope,
+      photos: photos,
+      lines: lines,
+      stations: stations
+    });
     $httpBackend = _$httpBackend_;
   }));
 
   describe('initialize', function() {
     beforeEach(function() {
-      $httpBackend.expectGET('/json/stations.json').respond(stations);
-      $httpBackend.expectGET('/json/lines.json').respond(lines);
-      $httpBackend.expectGET('/json/photos.json').respond(photos);
+      $httpBackend.expectGET('/api/photos').respond(photos);
+      $httpBackend.expectGET('/api/lines').respond(lines);
+      $httpBackend.expectGET('/api/stations').respond(stations);
       $httpBackend.flush();
     });
 

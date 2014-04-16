@@ -31,6 +31,12 @@ angular.module('app', ['ngResource', 'ui.router'])
         url: '/:id',
         templateUrl: 'views/photo.html',
         controller: 'PhotoCtrl',
+        resolve: {
+          photo: ['$stateParams', 'photos', function($stateParams, photos) {
+            console.log(photos[$stateParams.id]);
+            return photos[$stateParams.id];
+          }]
+        },
         onEnter: function() {
           document.body.style.overflow = 'hidden';
         },
@@ -100,7 +106,7 @@ angular.module('app', ['ngResource', 'ui.router'])
     $rootScope.$stateParams = $stateParams;
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
-      var el = $('body');
+      var el = angular.element(document.getElementsByTagName('body'));
 
       if (toState.name.match(/^admin/)) {
         el.addClass('admin');

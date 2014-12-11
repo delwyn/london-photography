@@ -1,6 +1,11 @@
 <div ng-click="closeDialog()" class="photo-dialog-overlay"></div>
 <div class="photo-dialog">
-  <img class="dialog-img" ng-src="{{photo.largeUrl}}"/>
-  <h2 id="dialog-title">{{photo.name}}</h2>
-  <p>{{photo.description}}</p>
+  <div class="photo-dialog-header">
+    <img class="dialog-img" ng-src="{{photo.largeUrl}}"/>
+  </div>
+
+  <div class="photo-dialog-content">
+    <h2 id="dialog-title">{{photo.name}}</h2>
+    <p>{{photo.description}}</p>
+  </div>
 </div>

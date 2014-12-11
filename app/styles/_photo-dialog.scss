@@ -21,11 +21,24 @@
   @include border-top-radius(10px);
   @include border-bottom-radius(10px);
   padding: 10px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   text-align: center;
+
+  .photo-dialog-header {
+    height: 50%;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .photo-dialog-content {
+    height: 50%;
+    overflow: scroll;
+  }
 }
 
-.dialog-img {
-  width: 100%;
-}
+// .dialog-img {
+//   width: 100%;
+// }
 

@@ -6,6 +6,10 @@ describe('Photo', function() {
     browser().navigateTo('/#/photos/1');
   });
 
+  it('works', function() {
+    console.log('???');
+  });
+
   // Need to figure out how to mock out factories???
 
   // it('should show the photo', function() {

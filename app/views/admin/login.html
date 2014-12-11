@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Sign In</h3>
+        </div>
+
+        <div class="panel-body">
+          <form novalidate ng-submit="login()">
+            <div class="form-group has-error">
+              <span ng-if="error" class="help-block text-danger">Invalid credentials</span>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-envelope"></i>
+                </span>
+                <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="glyphicon glyphicon-lock"></i>
+                </span>
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-default">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

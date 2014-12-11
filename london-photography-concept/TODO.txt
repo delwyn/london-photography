@@ -1,0 +1,45 @@
+1. Manage Photo
+  Add
+  Error handling
+  Flash messages
+
+2. Modularize
+3. Tests
+4. Validations
+5. Directives for everything
+
+
+
+Tests
+  E2E - Figure out how to get mock http backend working
+  Directives - Write specs for google-map
+
+Clear Line filter
+Mobile/Responsive design
+
+Stop photo jumping on load
+Stop image scrolling
+
+Precompile html templates?
+
+Sprites
+  Responsive for mobile?
+  Either need to use exact image sizes or % ???
+
+<!DOCTYPE html>
+<html>
+<body style="background: black">
+
+<svg height="88" width="88">
+  <circle cx="44" cy="44" r="40" stroke="white" stroke-width="4" fill="red" />
+  Sorry, your browser does not support inline SVG.
+  <line x1="4" y1="44" x2="84" y2="44" style="stroke:white;stroke-width:10" />
+</svg>
+
+<svg height="88" width="88">
+  <circle cx="44" cy="44" r="40" stroke="white" stroke-width="4" fill="red" />
+  Sorry, your browser does not support inline SVG.
+</svg>
+
+</body>
+</html>

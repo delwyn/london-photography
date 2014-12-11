@@ -1,16 +1,26 @@
 'use strict';
 
 describe('Photos', function() {
+  var ptor;
 
   beforeEach(function() {
-    browser().navigateTo('/#/photos/');
+    browser.get('#/photos');
+    ptor = protractor.getInstance();
   });
 
-  // Need to figure out how to mock out factories???
 
-  // it('should list all photos', function() {
-  //   expect(repeater('.photos li.photo').count()).toBe(8);
-  // });
+
+
+  // Need to figure out how to mock out factories???
+  it('works', function() {
+    var ele = by.id('title');
+    console.log(ptor.getCurrentUrl());
+    expect(ptor.isElementPresent(ele)).toBe(true);
+  });
+
+  it('should list all photos', function() {
+    expect(repeater('.photos li.photo').count()).toBe(8);
+  });
 
   // it('should filter photos by query string', function() {
   //   input('query').enter('london eye');
